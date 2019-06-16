@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+{include file="public/header" /}
+<body>
+<div class="page-content-wrap">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline tool-btn">
+                <a  class="mdui-btn mdui-btn-icon" href="{:url('admin/cate/cate_add')}"  mdui-tooltip="{content: '删除'}"><i class="mdui-icon material-icons">&#xe872;</i></a>
+
+                <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" ><i class="iconfont">&#xe656;</i></button>
+            </div>
+            <div class="layui-inline">
+                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <select name="states" lay-filter="status">
+                    <option value="">请选择一个状态</option>
+                    <option value="010">显示</option>
+                    <option value="021">隐藏</option>
+                </select>
+            </div>
+            <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+            <a  class="mdui-btn mdui-btn-icon" href="/comment_lst" mdui-tooltip="{content: '刷新'}"> <i class="mdui-icon material-icons">&#xe5d5;</i> </a>
+        </div>
+    </form>
+    <div class="layui-form" id="table-list">
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="50">
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="hidden-xs"  ><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                <th >ID</th>
+
+                <th>评论者</th>
+                <th>评论文章</th>
+                <th>评论时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            {volist name="commentInfo" id="vo"}
+            <tr>
+                <td class="hidden-xs" ><input type="checkbox" name="" lay-skin="primary" data-id="5"></td>
+                <td >{$vo.id}</td>
+
+                <td >{$vo.name}</td>
+                <td >{$vo.article.title}</td>
+                <td ><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status">{$vo.create_time|date='Y-m-d'}</button></td>
+                <td>
+                    <div class="layui-inline">
+                        <a href="">
+                            <button class="mdui-btn mdui-btn-icon   examine " data-url="{:url('admin/comment/comment_see',['id' => $vo['id']])}" mdui-tooltip="{content: '查看'}">
+                                <i class="mdui-icon material-icons">&#xe417;</i>
+                            </button>
+                        </a>
+
+                        <a href="">
+                            <button class="mdui-btn mdui-btn-icon" data-id="" mdui-tooltip="{content: '删除'}">
+                                <i class="mdui-icon material-icons">&#xe872;</i>
+                            </button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+    </div>
+</div>
+{include file="public/floor" /}
+<script>
+
+</script>
+<script type="text/javascript">
+    $('.cate_del').click(function () {
+        var id = $(this).attr('data-id');
+        layer.confirm('确定要删除吗？',{
+            title:'栏目删除！',
+            icon:3
+        },function (index) {
+            layer.close(index);
+            $.ajax({
+                url:"{:url('admin/cate/cate_del')}",
+                type:'post',
+                data:{id:id},
+                dataType:'json',
+                success:function (data) {
+                    if (data.code == 1){
+                        layer.msg(data.msg,{
+                            icon:1,
+                            time:2000
+                        },function () {
+                            location.href = data.url;
+                        });
+                    } else {
+                        layer.open({
+                            title:'栏目删除失败！',
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+                        })
+                    }
+                }
+            });
+        });
+
+        return false;
+    })
+
+</script>
+</body>
+
+</html>

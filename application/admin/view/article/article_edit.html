@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+{include file="public/header" /}
+<link href="__ADMIN__/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="__ADMIN__/lib/bootstrap/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+<script src="__ADMIN__/lib/bootstrap/js/fileinput.js" type="text/javascript"></script>
+<script src="__ADMIN__/lib/bootstrap/js/locales/zh.js"></script>
+<script src="__ADMIN__/lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<body>
+<form class="layui-form column-content-detail" action="{:url('admin/article/article_edit',['id' => $articleInfo.id])}" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="id" value="{$articleInfo.id}">
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">文章内容</li>
+            <li>SEO优化</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章标题：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入文章标题" autocomplete="off" class="layui-input" value="{$articleInfo.title}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章所属栏目：</label>
+                    <div class="layui-input-block">
+                        <select name="cateId" lay-verify="required">
+                            {volist name="cates" id="vo"}
+                            <option {if condition="$articleInfo['cateId'] eq $vo['id']"} selected="selected"{/if} value="{$vo.id}">{if condition= "$vo['level'] neq 0" }|{/if}<?php echo str_repeat('—',$vo['level'] * 3)?>{$vo.catename} </option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">标签：</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="label[]" value="1" title="推荐" checked  >
+                        <input type="checkbox" name="label[]" value="2" title="置顶"  >
+                        <input type="checkbox" name="label[]" value="3" title="热门"  >
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">缩略图像上传：</label>
+                    <div class="layui-input-block">
+                        <img width="150px;" style="padding: 10px" src="{$articleInfo.image_url}">
+                        <input id="file-5" name="image" class="file" type="file" multiple >
+                    </div>
+                </div>
+
+               <!-- <div class="layui-form-item">
+                    <label class="layui-form-label">是否单页：</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="switch" lay-skin="switch">
+                    </div>
+                </div>-->
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">作者：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="author" required lay-verify="required" placeholder="请输入文章作者" autocomplete="off" class="layui-input" value="{$articleInfo.author}">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章来源：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="laiyuan" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" class="layui-input" value="{$articleInfo.laiyuan}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章排序：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="sort" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="{$articleInfo.sort}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">点击数：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" value="{$articleInfo.count}">
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">文章内容：</label>
+                    <div class="layui-input-block">
+                        <textarea style="height: 300px" name="content"  lay-verify="content" id="container">{$articleInfo.content}</textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">关键字：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="keyword" placeholder="请输入关键字" autocomplete="off" class="layui-input" value="{$articleInfo.keyword}">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">描述：</label>
+                    <div class="layui-input-block">
+                        <textarea name="desc" placeholder="请输入内容" class="layui-textarea">{$articleInfo.desc}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" style="padding-left: 10px;">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <a class="mdui-btn mdui-icon" href="{:url('admin/article/article_lst')}"><i class="mdui-icon material-icons">&#xe15e;</i>返回</a>
+        </div>
+    </div>
+</form>
+{include file="public/floor"/}
+
+<script>
+    //图片上传
+    $("#file-5").fileinput({
+        language: 'zh',
+        //uploadUrl: '{:url("admin/article/article_upload")}', // you must set a valid URL here else you will get an error
+        allowedFileExtensions : ['jpg', 'png','gif','jpeg'],
+        overwriteInitial: true,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        maxFileCount:10,     //最大可上传几张图片
+        dropZoneEnabled:false, //是否显示图片拖拽区域
+        showUpload: false,   //是否显示上传标志
+        showCaption: false,    //是否显示下框
+        allowedFileTypes: ['image', 'video', 'flash'],
+    });
+
+</script>
+
+
+<script type="text/javascript">
+    //富文本
+    var ue = UE.getEditor('container');
+
+</script>
+<script>
+
+
+</script>
+</body>
+</html>

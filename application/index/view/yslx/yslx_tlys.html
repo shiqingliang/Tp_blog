@@ -1,0 +1,109 @@
+{include file="public/header" /}
+<div class="m-header-banner m-images-show">
+    <section class="am-container am-text-center">
+        <hgroup>
+                <h2>铁路运输</h2>
+            <div style="margin: 0 auto;"><img width="60%" src="__STATIC__/images/tielu.png"></div>
+
+        </hgroup>
+
+    </section>
+</div>
+
+<style>
+    .m-mn-box h1 {
+        text-align: center;
+
+    }
+
+</style>
+
+<div class="am-container">
+    <article class="m-mn-box m-images-container">
+        <section >
+
+            <?php  echo htmlspecialchars_decode($articles['content']);  ?>
+           <!-- <h1><b>什么是铁路运输？</b></h1>
+            <p> <img src="__STATIC__/images/tl1.jpg"></p>
+            <p>火车运输服务是内陆运输的重要参与者。优点适用广、效率高、灵活快速。</p>
+            <p>溓陌与多家大型及本地货运公司都建立了长期的伙伴关系，提供全国公路物流服务，使货主在专线方面有较多选择。</p>
+
+        </section>
+
+
+        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+        <section style="background: #d4edfa">
+            <h1><b>服务</b></h1>
+            <p>散货和拼箱、集装箱、超尺寸大件货物、港口拖车等。</p>
+            <p> 溓陌拖车服务还包括：根据客户的委托，办理货物出口前后的一切业务；审核客户提供的各类清单和批件；
+                缮制各类单证；订舱、报关；办理产地证、保险单和商检证；国内运输、进站、装车；签发提单、运杂费结算，快邮国内、外单证；
+                办理在国外的进口报关、纳税、拆箱/转运、送货；办理在国外的代理业务。</p>
+        </section>
+
+        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+        <section>
+            <h1><b>优势</b></h1>
+
+            <p> 速度快；</p>
+            <p> 零散货物拼箱运输；</p>
+            <p> 超大尺寸货物运输。</p>-->
+        </section>
+    </article>
+</div>
+
+<div style="width: 100px;margin: 0 auto;padding: 10px">
+    <a style="color: #c62b26" class="am-btn " href="/yslx">返 回 <i class="am-icon-reply"></i></a>
+</div>
+
+{include file="public/floor" /}
+{include file="public/footer_js" /}
+
+
+<script type="text/javascript">
+
+    //返回顶部
+    function imj2(){
+        this.init();
+    }
+    imj2.prototype = {
+        constructor: imj2,
+        init: function(){
+            this._initBackTop();
+        },
+        _initBackTop: function(){
+            var $backTop = this.$backTop = $('<div class="m-top-cbbfixed">'+
+                '<a class="m-top-weixin m-top-cbbtn"">'+
+                '<span class="m-top-weixin-icon"></span><div></div>'+
+                '</a>'+
+                '<a class="m-top-go m-top-cbbtn">'+
+                '<span class="m-top-goicon"></span>'+
+                '</a>'+
+                '</div>');
+            $('body').append($backTop);
+
+            $backTop.click(function(){
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            });
+
+            var timmer = null;
+            $(window).bind("scroll",function() {
+                var d = $(document).scrollTop(),
+                    e = $(window).height();
+                0 < d ? $backTop.css("bottom", "10px") : $backTop.css("bottom", "-90px");
+                clearTimeout(timmer);
+                timmer = setTimeout(function() {
+                    clearTimeout(timmer)
+                },100);
+            });
+        }
+
+    }
+    var imj2 = new imj2();
+    //end返回顶部
+</script>
+
+
+</body>
+</html>

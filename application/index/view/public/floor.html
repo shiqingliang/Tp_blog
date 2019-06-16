@@ -1,0 +1,48 @@
+
+
+<footer class="footer">
+
+
+    <div class="am-container">
+        <section class="am-g m-footer-container">
+            <section class="am-u-sm-12 am-u-md-12 am-u-lg-6">
+                <h2>关于我们</h2>
+                <p>贵州溓陌物流有限公司；
+                    注册资金两百万元，公司地址贵阳市清镇市马上到公路港，公司的经营业务主要是无车承运人业务，就是通过整合市场上的所有运输工具和运输途径，为客户找到相对最经济最高效最安全的运输方式，并全程实施操作；
+                    国内所有省市县的大中小件货物我们都可以提供运输服务；我们的服务理念是互利共赢共发展；
+                    <a href="./gsjj" rel="nofollow">《—更多—》</a></p>
+            </section>
+            <!--  <section class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                  <h2>最新资讯</h2>
+                  <ul>
+                      <li><time class="am-fr">90次阅读</time><a href="/post/151">台山社保局</a></li>
+                      <li><time class="am-fr">67次阅读</time><a href="/post/150">江门市外海小学</a></li>
+                      <li><time class="am-fr">72次阅读</time><a href="/post/148">恩城三小</a></li>
+                  </ul>
+              </section>-->
+            <section class="m-footer-flink">
+                <h2>友情链接</h2>
+                {volist name="link" id='vo'}
+                <a href="{$vo.url}">{$vo.linkname}</a>
+                {/volist}
+            </section>
+        </section>
+
+    </div>
+
+
+    <div class="m-footer-bottom">
+        <div class="am-container">
+            <div class="am-g">
+		<span class="m-u-sm-12 am-u-md-9 am-u-lg-10"> {$systemInfo.copyright} {$systemInfo.icp} <a href="http://www.hqld.cc/">技术支持：华企联动</a>
+        </span>
+                <span class="m-u-sm-12 am-u-md-3 am-u-lg-2 ico am-text-right am-hide-sm-only a">
+			<!--<a href="" data-am-popover="{content: '88888888', trigger: 'hover focus'}" rel="nofollow"><i class="am-icon-qq am-icon-md"></i></a>-->
+			<a href="" data-am-popover="{content: '{$systemInfo.telephone}', trigger: 'hover focus'}" rel="nofollow"><i class="am-icon-phone-square am-icon-md "></i></a>
+			<a href="" data-am-popover="{content: '{$systemInfo.landline}', trigger: 'hover focus'}" rel="nofollow"><i class="am-icon-weixin am-icon-md "></i></a>
+			<a href="" data-am-popover="{content: '{$systemInfo.email}', trigger: 'hover focus'}" rel="nofollow"><i class="am-icon-envelope am-icon-md "></i></a>
+		</span>
+            </div>
+        </div>
+    </div>
+</footer>

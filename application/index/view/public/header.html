@@ -1,0 +1,105 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$systemInfo.webname}</title>
+    <meta name="description" content="{$systemInfo.desc}" />
+    <meta name="keyword" content="{$systemInfo.keyword}" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="SHORTCUT ICON" href="__STATIC__/logo.png" >
+
+    <link rel="stylesheet" href="__STATIC__/css/amazeui.min.css">
+    <link rel="stylesheet" href="__STATIC__/css/style.css">
+    <link rel="stylesheet" href="__STATIC__/css/amazeui.css" />
+    <link rel="stylesheet" href="__STATIC__/css/common.min.css" />
+    <link rel="stylesheet" href="__STATIC__/css/index.min.css" />
+
+ 
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+
+
+    <![endif]-->
+</head>
+<!--[if lt IE 9]>
+<div class="am-modal am-modal-no-btn am-modal-active" tabindex="-1" id="doc-modal-1" style="display: block; width: 400px; margin-left: -200px; margin-top: -112px;">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">365 安全卫士提醒</div>
+        <div class="am-modal-bd">你的浏览器太古董了，还不换一个你就奥特曼了
+            <a href="http://browsehappy.com/" target="_blank" class="am-btn am-btn-danger am-btn-sm am-radius" rel="nofollow">速速点击换一个</a>
+        </div>
+    </div>
+</div>
+<![endif]-->
+<body>
+<style>
+    .LM h1{
+        color: #028bda;
+        margin: 0 0 0 0;
+    }
+</style>
+
+<header class="m-hd">
+    <section data-am-sticky class="am-show-md-up">
+        <div class="am-container">
+            <a href="/"  style="float:left; " class="LM"><h1>贵州溓陌物流</h1> </a>
+
+
+                  <!--  <ul class="am-fr m-about">
+                        <li><a href="/about/" class="am-btn am-btn-danger am-btn-sm am-radius" rel="nofollow">关于我们</a></li>
+                        <li><a href="/contact/" class="am-btn am-btn-danger am-btn-sm am-radius" rel="nofollow">联系我们</a></li>
+                    </ul> -->
+            <nav>
+                <ul class="m-nav am-nav am-nav-pills am-fr">
+                    {volist name="cates" id="vo"}
+                    <li><a href="{$vo.url}" rel="nofollow">{$vo.catename}</a></li>
+                    {/volist}
+
+                </ul>
+            </nav>
+    </section>
+    </div>
+
+    <nav data-am-widget="header" class="am-header am-show-sm-only">
+        <div class="am-header-left am-header-nav">
+            <a href="/" rel="nofollow">
+                <i class="am-header-icon am-icon-home"></i> 首页
+            </a>
+        </div>
+        <h1 class="am-header-title">
+            <a href="/" rel="nofollow">溓陌物流</a>
+        </h1>
+        <div class="am-header-right am-header-nav">
+            <a href="#right-link" class="" data-am-offcanvas="{target: '#r-nav'}">
+                <i class="am-header-icon am-icon-bars"></i> 菜单
+            </a>
+        </div>
+    </nav>
+
+    <!-- 侧边栏内容 -->
+    <div id="r-nav" class="am-offcanvas">
+        <div class="am-offcanvas-bar am-offcanvas-bar-flip">
+            <nav class="am-offcanvas-content">
+                <a href="/" rel="nofollow"><span class="logo"></span></a>
+
+
+                <p><i class="am-icon-home"></i> <a href="/gsjj" rel="nofollow">公司简介</a></p>
+                <p><i class="am-icon-desktop"></i> <a href="/yslx" rel="nofollow">运输路线</a></p>
+                <p><i class="am-icon-cogs"></i> <a href="/fwln" rel="nofollow">服务理念</a></p>
+      <!--          <p><i class="am-icon-credit-card"></i> <a href="/new.html" rel="nofollow">行业动态</a></p>-->
+                <p><i class="am-icon-qq"></i> <a href="/contact" rel="nofollow">联系我们</a></p>
+                <p><i class="am-icon-credit-card"></i> <a href="http://hqld.cc/" rel="nofollow">电子商务</a></p>
+
+            </nav>
+        </div>
+    </div>
+
+
+
+</header>

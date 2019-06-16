@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+{include file="public/header" /}
+<body>
+<div class="wrap-container clearfix">
+    <div class="column-content-detail">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline tool-btn">
+                    <a class="layui-btn layui-btn-small layui-btn-normal" mdui-tooltip="{content: '添加'}" href="{:url('admin/link/link_add')}"> <i class="layui-icon">&#xe654;</i> </a>
+
+                    <button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html"><i class="layui-icon">&#xe640;</i></button>
+                    <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.html"><i class="iconfont">&#xe656;</i></button>
+                </div>
+                <div class="layui-inline">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <select name="states" lay-filter="status">
+                        <option value="">请选择一个状态</option>
+                        <option value="010">正常</option>
+                        <option value="021">停止</option>
+                        <option value="0571">删除</option>
+                    </select>
+                </div>
+                <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+                <a  class="mdui-btn mdui-btn-icon" href="/link" mdui-tooltip="{content: '刷新'}"> <i class="mdui-icon material-icons">&#xe5d5;</i> </a>
+
+            </div>
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="nob">
+                <colgroup>
+                    <col  width="50">
+                    <col class="hidden-xs" width="50">
+                    <col class="hidden-xs" width="50">
+                    <col class="hidden-xs" width="100">
+                    <col class="hidden-xs" width="150">
+                    <col width="80">
+                    <col width="150">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="hidden-xs"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                    <th class="hidden-xs"  >ID</th>
+                    <th class="hidden-xs" >排序</th>
+                    <th>连接标题</th>
+                    <th  class="hidden-xs">链接地址</th>
+                    <th >状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {volist name="links" id="vo"}
+                <tr>
+                    <td class="hidden-xs"><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
+                    <td class="hidden-xs" >{$vo.id}</td>
+                    <td  class="hidden-xs" ><input style="width: 50px;"  name="sort" autocomplete="off" class="layui-input" value="{$vo.sort}" data-id="{$vo.id}"></td>
+                    <td>{$vo.linkname}</td>
+                    <td class="hidden-xs" ><a href="{$vo.url}">{$vo.url}</a></td>
+                    <td >
+                        {if $vo['state'] eq 1}
+                        <button class="layui-btn layui-btn-mini layui-btn-normal"> 已推荐 </button>
+                        {elseif $vo['state'] eq 0 }
+                        <button class="layui-btn layui-btn-mini layui-btn-danger">  未推荐 </button>
+                       {/if}
+                    </td>
+                    <td>
+                        <div class="layui-inline">
+                            <a class="layui-btn layui-btn-small layui-btn-normal" mdui-tooltip="{content: '修改'}" href="{:url('admin/link/link_edit',['id'=>$vo['id']])}">
+                                <i class="mdui-icon material-icons">&#xe3c9;</i>
+                            </a>
+                            <a class="layui-btn layui-btn-small layui-btn-danger link_del " mdui-tooltip="{content: '删除'}" data-id="{$vo.id}" href="#">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            <div class="page-wrap">
+                {$links|raw}
+               <!-- <ul class="pagination">
+                    <li class="disabled"><span>«</span></li>
+                    <li class="active"><span>1</span></li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">»</a>
+                    </li>
+                </ul>-->
+
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/floor" /}
+
+<script>
+    $('.link_del').click(function () {
+        var id = $(this).attr('data-id');
+        layer.confirm('确定删除吗？', {
+            title:'删除链接',
+            icon:3
+        }, function (index) {
+            layer.close(index);
+            $.ajax({
+                url:"{:url('admin/link/link_del')}",
+                type:'post',
+                data:{id:id},
+                dataType:'json',
+                success:function (data) {
+                    if (data.code == 1) {
+                        layer.msg(data.msg, {
+                            icon:1,
+                            time:2000
+                        }, function () {
+                            location.href = data.url;
+                        });
+                    }else {
+                        layer.open({
+                            title:'删除连接失败',
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+                        });
+                    }
+                }
+            });
+        });
+        return false;
+    });
+
+    $('input[name=sort]').change(function () {
+        var id = $(this).attr('data-id');
+        var sort = $(this).val();
+        $.ajax({
+           url: "{:url('admin/link/link_sort')}" ,
+            type: 'post',
+            data:{id:id,sort:sort},
+            dataType: 'json',
+            success:function (data) {
+                if (data.code == 1){
+                    layer.msg(data.msg,{
+                        icon:1,
+                        time: 2000,
+                    },function () {
+                        location.href = data.url;
+                    });
+                } else {
+                    open({
+                        title:'链接排序失败！',
+                        content:data.msg,
+                        icon:5,
+                        anim:6
+                    });
+                }
+            }
+        });
+        return false;
+    })
+</script>
+</body>
+
+
+
+</html>

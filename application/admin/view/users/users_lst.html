@@ -1,0 +1,99 @@
+{include file="public/header" /}
+<body>
+<div class="wrap-container">
+    <div class="column-content-detail">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline tool-btn">
+                    <a  href="/users_add" class="layui-btn layui-btn-small layui-btn-normal " mdui-tooltip="{content: '添加'}">
+                        <i class="layui-icon">&#xe654;</i>
+                    </a>
+                    <a  href="/users_lst" class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs"><i class="iconfont">&#xe656;</i></a>
+                </div>
+                <div class="layui-inline">
+                    <input type="text" name="name" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <select name="states" lay-filter="status">
+                        <option value="">请选择一个状态</option>
+                        <option value="010">显示</option>
+                        <option value="021">隐藏</option>
+                    </select>
+                </div>
+                <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+
+                <a  class="mdui-btn mdui-btn-icon" href="/users_lst" mdui-tooltip="{content: '刷新'}">
+                    <i class="mdui-icon material-icons">&#xe5d5;</i>
+                </a>
+
+            </div>
+        </form>
+        <div class="layui-form" id="category-table-list">
+            <table class="layui-table" lay-even lay-skin="nob">
+                <colgroup>
+                    <col width="50">
+                    <col class="hidden-xs" width="50">
+                    <col width="200">
+                    <col class="hidden-xs">
+                    <col class="hidden-xs">
+                    <col class="hidden-xs">
+                    <col class="hidden-xs" width="100">
+                    <col width="150">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                    <th class="hidden-xs">ID</th>
+                    <th>用户名</th>
+                    <th class="hidden-xs">登录ip</th>
+                    <th class="hidden-xs">上次登录时间</th>
+                    <th>用户组</th>
+                    <th class="hidden-xs">状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td><input type="checkbox" name="" lay-skin="primary"  data-id="1"></td>
+                    <td class="hidden-xs">1</td>
+                    <td>admin</td>
+                    <td class="hidden-xs">127.0.0.1</td>
+                    <td class="hidden-xs">1989-10-14</td>
+                    <td>[超级管理员]</td>
+                    <td  class="hidden-xs" ><button class="layui-btn layui-btn-mini layui-btn-normal">正常</button></td>
+                    <td>
+                        <div class="layui-inline">
+
+                            <a href="/users_edit" class="layui-btn layui-btn-small layui-btn-normal "  data-id="1" mdui-tooltip="{content: '修改'}" >
+                                <i class="layui-icon">&#xe642;</i>
+                            </a>
+                            <button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1"><i class="layui-icon">&#xe640;</i></button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="page-wrap">
+                <ul class="pagination">
+                    <li class="disabled"><span>«</span></li>
+                    <li class="active"><span>1</span></li>
+                    <li>
+                        <a href="/admin/category/index.html?page=2">2</a>
+                    </li>
+                    <li>
+                        <a href="/admin/category/index.html?page=2">»</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{include file="public/floor" /}
+
+</body>
+
+</html>

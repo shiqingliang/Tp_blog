@@ -1,0 +1,30 @@
+{include file="public/header" /}
+<style>
+    h3{
+        font-size: 16px;
+        font-weight: 800;
+        margin-left: 10px;
+    }
+
+</style>
+
+<div class="layui-collapse" >
+
+        <h2 class="layui-colla-title" style="text-align: center;">
+            <span mdui-tooltip="{content: '评论者：{$comment_see_Info['name']}'}"><i class="mdui-icon material-icons">account_circle</i>：<b>{$comment_see_Info['name']}</b></span>
+            <span mdui-tooltip="{content: '相关文章：{$comment_see_Info.article.title}'}"><i class="mdui-icon material-icons" >assignment</i>：<b>{$comment_see_Info.article.title}</b></span>
+            <span mdui-tooltip="{content: '时间：{$comment_see_Info.create_time|date='Y-m-d'}'}"><i class="mdui-icon material-icons" >access_time</i>：<b>{$comment_see_Info.create_time|date='Y-m-d'}</b></span>
+         </h2>
+        <div  class="layui-colla-content layui-show  test">
+           <h3>评论类容:</h3>
+            <div class="layui-colla-content layui-show">
+                <p>{$comment_see_Info['content']}</p>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+{include file="public/floor"/}

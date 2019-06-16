@@ -1,0 +1,111 @@
+{include file="public/header" /}
+<style>
+
+    .LM{
+        color: #f0f0f0;
+        font-size:15px;"
+    }
+
+    a {
+        color: #0e90d2;
+    }
+</style>
+
+<div class="m-header-banner m-images-show">
+    <section class="am-container am-text-center">
+        <hgroup>
+            <h2>服务理念</h2>
+            <p>贵州溓陌物流有限公司</p>
+        </hgroup>
+
+    </section>
+</div>
+
+<div class="am-container">
+    <article class="m-mn-box m-images-container">
+        <section>
+            <?php echo htmlspecialchars_decode($fwlnInfo['content']); ?>
+            <!--<h2>一,核心理念：服务创造价值</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“服务”是物流企业的产品表现形式，客户通过服务链条传递价值，而物流企业则通过服务实现自我价值。之于服务，我们更新理念，完善网络，提升技术，改进流程，无一不用其极，最终目标却只有一个——最大化的“创造价值”。一旦企业价值实现，个人自我价值和企业公益价值的发现活动也宣告开始。</p>
+            <h2>二，企业精神：朴而至信，笃行于微</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                1.以客户为核心的物流服务以客户为核心的增值服务，包括向买卖双方提供利用第三方专业人员来配送产品的各种可供选择的方式。
+                处理客户向制造商的订货、直接送货到商店或客户家中，以及按照零售店货架储备所需的明细货品规格持续提供递送服务。
+                这类专门化的增值服务可以被有效地用来支持新产品的引入，以及基于当地市场的季节性配送。
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            2.以促销为核心的物流服务以促销为核心的增值服务，涉及独特的销售点和展销人的配置，以及旨在刺激销售的其他范围很广的各种服务。
+                销售点展销可以包含来自不同供应商的多种产品，组成一个多节点的展销单元，以便于适合特定的零售商店。在有选择的情况下，以促销为核心的增值服务还对储备产品的样品提供特别介绍，甚至进行直接邮寄促销。
+                许多以促销为核心的增值服务包括了销售点广告宣传和促销材料的物流支持等。 </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                3.以制造为核心的物流服务以制造为核心的增值服务，是通过独特的产品分类和递送来支持制造活动的。
+                既然每一位客户的实际设施和制造装配都是独特的，那么，从理想上来说，递送和引入内向流动的材料和部件应进行客户定制化。
+                以制造为核心的服务，与其说是在预测基础上生产独特的产品，还不如说是对基本产品进行了修正，以适应特定的客户需求，其结果改善了服务。 </p>
+            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                4.以时间为核心的物流服务以时间为核心的增值服务，涉及使用专业人员在递送以前对存货进行分类、组合排序，主要采用准时化形式来最大限度地满足物流服务对象的各种时间需要。
+                以时间为核心的服务，就是排除不必要的仓库设施和重复劳动，以期最大限度地提高服务速度。
+            </p>-->
+
+        </section>
+    </article>
+</div>
+{include file="public/floor" /}
+{include file="public/footer_js" /}
+
+
+<script type="text/javascript">
+    /*    $(function(){
+            var str = "";
+            $("#code").qrcode({
+                render: "table",
+                width: 100,
+                height:100,
+                text: str
+            });
+        })*/
+    // 二维码生成
+    //返回顶部
+    function imj2(){
+        this.init();
+    }
+    imj2.prototype = {
+        constructor: imj2,
+        init: function(){
+            this._initBackTop();
+        },
+        _initBackTop: function(){
+            var $backTop = this.$backTop = $('<div class="m-top-cbbfixed">'+
+                '<a class="m-top-weixin m-top-cbbtn"">'+
+                '<span class="m-top-weixin-icon"></span><div></div>'+
+                '</a>'+
+                '<a class="m-top-go m-top-cbbtn">'+
+                '<span class="m-top-goicon"></span>'+
+                '</a>'+
+                '</div>');
+            $('body').append($backTop);
+
+            $backTop.click(function(){
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            });
+
+            var timmer = null;
+            $(window).bind("scroll",function() {
+                var d = $(document).scrollTop(),
+                    e = $(window).height();
+                0 < d ? $backTop.css("bottom", "10px") : $backTop.css("bottom", "-90px");
+                clearTimeout(timmer);
+                timmer = setTimeout(function() {
+                    clearTimeout(timmer)
+                },100);
+            });
+        }
+
+    }
+    var imj2 = new imj2();
+    //end返回顶部
+</script>
+
+
+</body>
+</html>

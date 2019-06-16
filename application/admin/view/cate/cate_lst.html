@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+{include file="public/header" /}
+<body>
+<div class="page-content-wrap">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline tool-btn">
+                <a  class="mdui-btn mdui-btn-icon" href="{:url('admin/cate/cate_add')}"  mdui-tooltip="{content: '添加'}"> <i class="mdui-icon material-icons">&#xe147;</i></a>
+
+                    <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" ><i class="iconfont">&#xe656;</i></button>
+            </div>
+            <div class="layui-inline">
+                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <select name="states" lay-filter="status">
+                    <option value="">请选择一个状态</option>
+                    <option value="010">显示</option>
+                    <option value="021">隐藏</option>
+                </select>
+            </div>
+            <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+            <a  class="mdui-btn mdui-btn-icon" href="/cate_lst" mdui-tooltip="{content: '刷新'}"> <i class="mdui-icon material-icons">&#xe5d5;</i> </a>
+        </div>
+    </form>
+    <div class="layui-form" id="table-list">
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="150">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="150">
+            </colgroup>
+            <thead>
+            <tr>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                <th >ID</th>
+                <th>排序</th>
+                <th>菜单名称</th>
+                <th>控制器</th>
+                <th>类型</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            {volist name="cates" id="vo"}
+            <tr>
+                <td><input type="checkbox" name="" lay-skin="primary" data-id="5"></td>
+                <td >{$vo.id}</td>
+                <td ><input style="width: 50px; height: 25px" type="text" name="title" autocomplete="off" class="layui-input" value="0" data-id="1"></td>
+                <td >{if condition= "$vo['level'] neq 0" }|{/if}<?php echo str_repeat('—',$vo['level'] * 3)?>{$vo.catename}</td>
+                <td ><a href="{$vo.url}" target="_blank">{$vo.url}</a></td>
+                <td ><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status">{if $vo['type'] == 1}列表 {elseif $vo['type'] == 2} 单页 {/if}</button></td>
+                <td>
+                    <div class="layui-inline">
+                        <a href="{:url('admin/cate/cate_edit',['id' => $vo['id']])}">
+                            <button class="layui-btn layui-btn-mini layui-btn-normal" mdui-tooltip="{content: '修改'}">
+                                <i class="mdui-icon material-icons">&#xe3c9;</i>
+                            </button>
+                        </a>
+
+                        <a href="">
+                            <button class="layui-btn layui-btn-mini layui-btn-danger cate_del" data-id="{$vo.id}" mdui-tooltip="{content: '删除'}">
+                            <i class="layui-icon">&#xe640;</i>
+                            </button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+    </div>
+</div>
+{include file="public/floor" /}
+<script>
+
+</script>
+<script type="text/javascript">
+$('.cate_del').click(function () {
+    var id = $(this).attr('data-id');
+    layer.confirm('确定要删除吗？',{
+        title:'栏目删除！',
+        icon:3
+    },function (index) {
+        layer.close(index);
+        $.ajax({
+            url:"{:url('admin/cate/cate_del')}",
+            type:'post',
+            data:{id:id},
+            dataType:'json',
+            success:function (data) {
+                if (data.code == 1){
+                    layer.msg(data.msg,{
+                        icon:1,
+                        time:2000
+                    },function () {
+                        location.href = data.url;
+                    });
+                } else {
+                    layer.open({
+                        title:'栏目删除失败！',
+                        content:data.msg,
+                        icon:5,
+                        anim:6
+                    })
+                }
+            }
+        });
+    });
+
+    return false;
+})
+
+</script>
+</body>
+
+</html>

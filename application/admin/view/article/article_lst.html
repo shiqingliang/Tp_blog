@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+{include file="public/header" /}
+<body>
+<div class="wrap-container clearfix">
+    <div class="column-content-detail">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline tool-btn">
+                    <a  class="mdui-btn mdui-btn-icon" href="{:url('admin/article/article_add')}"  mdui-tooltip="{content: '添加'}"><i class="mdui-icon material-icons">&#xe147;</i></a>
+
+                    <button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html"><i class="layui-icon">&#xe640;</i></button>
+                    <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="article-add.html"><i class="iconfont">&#xe656;</i></button>
+
+                </div>
+                <div class="layui-inline">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <select name="states" lay-filter="status">
+                        <option value="">请选择一个状态</option>
+                       <!-- <option value="010">正常</option>
+                        <option value="021">停止</option>
+                        <option value="0571">删除</option>-->
+                    </select>
+                </div>
+                <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+                <a  class="mdui-btn mdui-btn-icon" href="/article_lst" mdui-tooltip="{content: '刷新'}"> <i class="mdui-icon material-icons">&#xe5d5;</i> </a>
+            </div>
+
+        </form>
+        <div class="layui-form" id="table-list">
+            <table class="layui-table" lay-even lay-skin="line">
+                <colgroup>
+                    <col width="50">
+                    <col class="hidden-xs" width="50">
+                    <col class="hidden-xs" width="50">
+                    <col class="hidden-xs" width="150">
+                    <col class="hidden-xs" width="100">
+                    <col class="hidden-xs" width="150">
+                    <col width="80">
+                    <col width="150">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                    <th class="hidden-xs">ID</th>
+                    <th class="hidden-xs">排序</th>
+                    <th>文章标题</th>
+                    <th class="hidden-xs">缩略图</th>
+                    <th>所属栏目</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {volist name="articles" id="vo"}
+                <tr>
+                    <td><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
+                    <td class="hidden-xs">{$vo.id}</td>
+                    <td class="hidden-xs">
+                        <input style="width: 40px; height: 25px"   name="sort" autocomplete="off" class="layui-input" value="{$vo.sort}" data-id="{$vo.id}">
+                    </td>
+                    <td>{$vo.title}</td>
+                    <td class="hidden-xs">
+                        <img src="{$vo.image_url}" width="25px">
+                    </td>
+                    <td>{$vo.cate.catename}</td>
+                    <td><button class="layui-btn layui-btn-mini layui-btn-normal">正常</button></td>
+                    <td>
+                        <div class="layui-inline">
+                            <a href="{:url('admin/article/article_edit',['id'=>$vo['id']])}">
+                                <button class="mdui-btn mdui-btn-icon " mdui-tooltip="{content: '修改'}" >
+                                <i class="mdui-icon material-icons">&#xe3c9;</i></button>
+                            </a>
+
+                                <button data-id="{$vo.id}" class="mdui-btn mdui-btn-icon  article_del " mdui-tooltip="{content: '删除'}" >
+                                <i class="mdui-icon material-icons">&#xe872;</i></button>
+
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+            <div class="page-wrap">
+                {$articles|raw}
+                <!--<ul class="pagination">
+                    <li class="disabled"><span>«</span></li>
+                    <li class="active"><span>1</span></li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">»</a>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{include file="public/floor" /}
+
+<script>
+
+    $('.article_del').click(function () {
+        var id = $(this).attr('data-id');
+        layer.confirm('确定删除吗？', {
+            title:'删除文章',
+            icon:3
+        }, function (index) {
+            layer.close(index);
+            $.ajax({
+                url:"{:url('admin/article/article_del')}",
+                type:'post',
+                data:{id:id},
+                dataType:'json',
+                success:function (data) {
+                    if (data.code == 1) {
+                        layer.msg(data.msg, {
+                            icon:1,
+                            time:2000
+                        }, function () {
+                            location.href = data.url;
+                        });
+                    }else {
+                        layer.open({
+                            title:'删除文章失败',
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+                        });
+                    }
+                }
+            });
+        });
+        return false;
+    });
+
+
+    $('input[name=sort]').change(function () {
+        var id = $(this).attr('data-id');
+        var sort = $(this).val();
+        $.ajax({
+           url:"{:url('admin/article/article_sort')}",
+            type: 'post',
+            data:{id:id,sort:sort},
+            dataType: 'json',
+            success:function (data) {
+                if (data.code == 1){
+                    layer.msg(data.msg,{
+                        icon:1,
+                        time: 2000  
+                    },function () {
+                        location.href = data.url;
+                    });
+                } else {
+                    open({
+                        title:'排序失败！',
+                        content:data.msg,
+                        icon:5,
+                        anim:6
+                    });
+                }
+            }
+        });
+        return false;
+    });
+</script>
+
+</body>
+
+</html>

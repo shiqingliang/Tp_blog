@@ -1,0 +1,103 @@
+{include file="public/header" /}
+<style>
+    .LM{
+        color:#f0f0f0;
+        font-size:15px;"
+    }
+</style>
+
+
+<div class="m-header-banner m-images-show">
+    <section class="am-container am-text-center">
+        <hgroup>
+            <h2>公司简介</h2>
+            <p>贵州溓陌物流有限公司</p>
+         <!--   <div class="data">
+                <span><i class="am-icon-check-square-o"></i> 点击：888 次</span>
+            </div>-->
+        </hgroup>
+
+    </section>
+</div>
+
+<div class="am-container">
+    <article class="m-mn-box m-images-container">
+        <section>
+
+
+            <?php echo  htmlspecialchars_decode($gsjjInfo['content']);   ?>
+
+
+       <!--  <p><img src="__STATIC__/images/jianjie.png"></p>
+            <h2>公司简介</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贵州溓陌物流有限公司；注册资金两百万元，公司地址贵阳市清镇市马上到公路港，公司的经营业务主要是无车承运人业务，就是通过整合市场上的所有运输工具和运输途径，为客户找到相对最经济最高效最安全的运输方式，并全程实施操作；国内所有省市县的大中小件货物我们都可以提供运输服务；我们的服务理念是互利共赢共发展；</p>
+
+            <h2>业务范围</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运输方式：铁路运输，空运、跨城运输：在北京、上海、广州、深圳、香港、韩国、日本、台湾、等地区都能准时货运。</p>
+            <h2>服务理念</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “服务”是物流企业的产品表现形式，客户通过服务链条传递价值，而物流企业则通过服务实现自我价值。之于服务，我们更新理念，完善网络，提升技术，改进流程，无一不用其极，最终目标却只有一个——最大化的“创造价值”。
+                一旦企业价值实现，个人自我价值和企业公益价值的发现活动也宣告开始。</p>-->
+        </section>
+    </article>
+</div>
+{include file="public/floor" /}
+{include file="public/footer_js" /}
+
+
+<script type="text/javascript">
+/*    $(function(){
+        var str = "";
+        $("#code").qrcode({
+            render: "table",
+            width: 100,
+            height:100,
+            text: str
+        });
+    })*/
+    // 二维码生成
+    //返回顶部
+    function imj2(){
+        this.init();
+    }
+    imj2.prototype = {
+        constructor: imj2,
+        init: function(){
+            this._initBackTop();
+        },
+        _initBackTop: function(){
+            var $backTop = this.$backTop = $('<div class="m-top-cbbfixed">'+
+                '<a class="m-top-weixin m-top-cbbtn"">'+
+                '<span class="m-top-weixin-icon"></span><div></div>'+
+                '</a>'+
+                '<a class="m-top-go m-top-cbbtn">'+
+                '<span class="m-top-goicon"></span>'+
+                '</a>'+
+                '</div>');
+            $('body').append($backTop);
+
+            $backTop.click(function(){
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            });
+
+            var timmer = null;
+            $(window).bind("scroll",function() {
+                var d = $(document).scrollTop(),
+                    e = $(window).height();
+                0 < d ? $backTop.css("bottom", "10px") : $backTop.css("bottom", "-90px");
+                clearTimeout(timmer);
+                timmer = setTimeout(function() {
+                    clearTimeout(timmer)
+                },100);
+            });
+        }
+
+    }
+    var imj2 = new imj2();
+    //end返回顶部
+</script>
+
+
+</body>
+</html>

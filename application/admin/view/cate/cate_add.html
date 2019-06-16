@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+{include file="public/header" /}
+<body>
+<div class="wrap-container">
+    <form class="layui-form" style="width: 90%;padding-top: 20px;" action="{:url('admin/cate/cate_add')}" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级菜单：</label>
+            <div class="layui-input-block">
+                <select name="pid" lay-verify="required">
+                    <option value="0">作为顶级栏目</option>
+                    {volist name="cates" id="vo"}
+
+                    <option value="{$vo.id}">{if condition= "$vo['level'] neq 0" }|{/if}<?php echo str_repeat('—',$vo['level'] * 3)?>{$vo.catename}  </option>
+
+                    {/volist}
+                </select>
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="catename" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">控制器：</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" required lay-verify="required" placeholder="请输入控制器" autocomplete="off" class="layui-input">
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">类型：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="type" value="1" title="列表" checked>
+                    <input type="radio" name="type" value="2" title="单页">
+                </div>
+
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn layui-btn-normal" id="add" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <a class="mdui-btn mdui-icon" href="/cate_lst"><i class="mdui-icon material-icons">&#xe15e;</i>返回</a>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{include file="public/floor" /}
+
+<!--<script>
+    $(function () {
+        $('#add').click(function () {
+            $.ajax({
+                url:"{:url('admin/menu/menu_add')}",
+                type:'post',
+                data:$('form').serialize(),
+                dataType:'json',
+                success:function (data) {
+                    if (data.code == 1){
+                        layer.msg(data.msg,{icon:1, time:2000,},function () {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            window.parent.location.reload();   //重心加载页面
+                            parent.layer.close(index);
+                        },3000);
+                    }else {
+                        layer.open({title:"栏目添加失败！", content:data.msg, icon:5, anim:5});
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>-->
+
+
+
+
+</body>
+
+</html>

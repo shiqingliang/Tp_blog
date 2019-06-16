@@ -1,0 +1,189 @@
+<!doctype html>
+{include file="public/header" /}
+<style>
+    p, span {
+        font-family: 'Microsoft Yahei'!important;
+    }
+    .am-container li a{
+        color: #1a1f2a;
+    }
+    .home {
+        color: #f0f0f0;
+    }
+    .LM{
+        color: #f0f0f0;
+        font-size:15px;"
+    }
+    a {
+        color: #0e90d2;
+    }
+</style>
+
+<div class="m-header-banner m-list-header" style="background: url(__STATIC__/images/contact-bg-1.jpg) 50% 0 no-repeat fixed;">
+    <section class="am-container">
+        <hgroup data-am-scrollspy="{animation:'slide-bottom', delay: 267}">
+            <h2>联系我们</h2>
+            <p>拥有不一样的物流体验，你还在等什么？可以从以下方式联系我们。</p>
+        </hgroup>
+    </section>
+</div>
+<nav class="m-cat-nav">
+    <ul class="am-container">
+        <li ><a href="{:url('index/gsjj/index')}"><i class="icon-chevron-right"></i>公司简介</a></li>
+        <li><a href="{:url('index/yslx/index')}">运输路线</a></li>
+        <li ><a href="/fwln"><i class="icon-chevron-right"></i>服务理念</a></li>
+        <li ><a href="http://hqld.cc/"><i class="icon-chevron-right"></i>电子商务</a></li>
+        <li class="am-active" ><a href="{:url('index/contact/index')}"><i class="icon-chevron-right"></i>联系我们</a></li>
+    </ul>
+</nav>
+
+
+<div class="am-container m-contact-page">
+  <p><b>贵州溓陌物流有限公司地址：</b></p>
+<div id="map">
+    <div style="width: 100%; height: 503px;" id="allmap">26.5542100509,106.5117533298</div>
+</div>
+</div>
+
+
+<div class="am-container m-contact-page">
+    <article class="m-mn-box">
+        <section>
+            <p><br/></p>      <h3>
+            体验快捷生活，从联系溓陌开始。
+        </h3>
+            <p>
+                认真服务，提升用户体验和品牌价值感。
+            </p>
+            <ul class="am-avg-sm-1 am-avg-md-4 am-avg-lg-4 am-thumbnails list-paddingleft-2">
+                <li>
+                    <div class="m-contact-infobox">
+                        <h3>
+                            <em class="am-icon-phone-square"></em> {$systemInfo.landline}
+                        </h3>
+                    </div>
+                </li>
+                <li>
+                    <div class="m-contact-infobox">
+                        <h3>
+                            <em class="am-icon-qq"></em>{$systemInfo.email}
+                        </h3>
+                    </div>
+                </li>
+                <li>
+                    <div class="m-contact-infobox">
+                        <h3>
+                            <em class="am-icon-weixin"></em> {$systemInfo.telephone}
+                        </h3>
+                    </div>
+                </li>
+                <li>
+                    <div class="m-contact-infobox">
+                        <h3>
+                            <em class="am-icon-envelope"></em>  {$systemInfo.email}
+                        </h3>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </article>
+</div>
+{include file="public/floor" /}
+{include file="public/footer_js" /}
+
+<!--百度地图-->
+<script>
+    $(function () {
+        ShowMap('106.5117533298,26.5542100509', '贵州溓陌物流有限公司', '贵阳市清镇市马上到公路港', '{$systemInfo.telephone}','{$systemInfo.landline}', '20');
+    });
+    function getInfo(id) {
+        $.ajax({
+            type: "POST",
+            url: "WebUserControl/Contact/GetInfo.ashx",
+            cache: false,
+            async: false,
+            data: { ID: id },
+            success: function (data) {
+                data = eval(data);
+                var length = data.length;
+                if (length > 0) {
+                    ShowMap(data[0]["Image"], data[0]["NewsTitle"], data[0]["Address"], data[0]["Phone"], data[0]["NewsTags"], data[0]["NewsNum"]);
+                }
+            }
+        });
+    }
+    function ShowMap(zuobiao, name, addrsee, phone, chuanzhen, zoom) {
+        var arrzuobiao = zuobiao.split(',');
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(arrzuobiao[0], arrzuobiao[1]), zoom);
+        map.addControl(new BMap.NavigationControl());
+        var marker = new BMap.Marker(new BMap.Point(arrzuobiao[0], arrzuobiao[1]));
+        map.addOverlay(marker);
+        var infoWindow = new BMap.InfoWindow('<p style="color: #bf0008;font-size:14px;">' + name + '</p><p>地址：' + addrsee + '</p><p>电话：' + phone + '</p><p>座机：' + chuanzhen + '</p>');
+        marker.addEventListener("click", function () {
+            this.openInfoWindow(infoWindow);
+        });
+        marker.openInfoWindow(infoWindow);
+    }
+</script>
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        var str = "http://www.imj2.com/contact/";
+        $("#code").qrcode({
+            render: "table",
+            width: 100,
+            height:100,
+            text: str
+        });
+    })
+    // 二维码生成
+    //返回顶部
+    function imj2(){
+        this.init();
+    }
+    imj2.prototype = {
+        constructor: imj2,
+        init: function(){
+            this._initBackTop();
+        },
+        _initBackTop: function(){
+            var $backTop = this.$backTop = $('<div class="m-top-cbbfixed">'+
+                '<a class="m-top-weixin m-top-cbbtn"">'+
+                '<span class="m-top-weixin-icon"></span><div></div>'+
+                '</a>'+
+                '<a class="m-top-go m-top-cbbtn">'+
+                '<span class="m-top-goicon"></span>'+
+                '</a>'+
+                '</div>');
+            $('body').append($backTop);
+
+            $backTop.click(function(){
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            });
+
+            var timmer = null;
+            $(window).bind("scroll",function() {
+                var d = $(document).scrollTop(),
+                    e = $(window).height();
+                0 < d ? $backTop.css("bottom", "10px") : $backTop.css("bottom", "-90px");
+                clearTimeout(timmer);
+                timmer = setTimeout(function() {
+                    clearTimeout(timmer)
+                },100);
+            });
+        }
+
+    }
+    var imj2 = new imj2();
+    //end返回顶部
+</script>
+
+
+</body>
+</html>

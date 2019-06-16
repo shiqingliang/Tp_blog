@@ -1,0 +1,98 @@
+{include file="public/header" /}
+<div class="m-header-banner m-images-show">
+    <section class="am-container am-text-center">
+        <hgroup>
+            <div style="margin: 0 auto;"><img width="60%" src="__STATIC__/images/kongyun.png"></div>
+        </hgroup>
+
+    </section>
+</div>
+
+<style>
+    .m-mn-box h1 {
+        text-align: center;
+        font-size:35px;
+    }
+
+</style>
+
+<div class="am-container">
+    <article class="m-mn-box m-images-container">
+        <section>
+
+            <?php  echo htmlspecialchars_decode($articles['content']);  ?>
+            <!--<h1><b>什么是空运？</b></h1>
+            <p> <img src="__STATIC__/images/ky1.png"></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空运以专业的态度为海内外客户提供安全，快捷，高效的物流服务。 以深圳市场为依托，整合深圳，广州，香港，上海，宁波，武汉，北京，厦门等机场的优势，航线覆盖全球的各大国际机场。 </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公司拥有专业的空运操作团队，为您提供提货，订舱，商检，买单，报关、监管仓转运，FOB香港派送、代购保险，实时反馈货物追踪信息等一站式服务，
+                充分利用港澳自由贸易区的优势，为客户提供个性化的空运服务，配合您的生产、运输、收款等各环节，最大程度的节约您宝贵的时间，人力，降低资金和时间风险，让您从此不再为交货期短和运输烦杂而烦扰。</p>
+
+        </section>
+        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+        <section>
+            <h1><b>服务</b></h1>
+            <p> <img width="100%" src="__STATIC__/images/ky2.png"></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们的优势航线是中东，中南美，欧美，辅以东南亚及非洲。
+                长期与EK、EY、SV、BA、AA、PO、UPS、SQ、RU、CA、CZ、ZH等航空公司保持着良好的合作关系。
+                我司在全球有非常全面的代理网络，能为客户提供到门和进口空运的服务，在一些特殊物品方面，我司也具备一定的操作实力。
+                秉承“以客为先”的理念，致力于发展成为供应链一体化的供应商。
+                您的满意是我们的最大的荣幸，期待与您的合作！</p>-->
+        </section>
+    </article>
+</div>
+
+<div style="width: 100px;margin: 0 auto;padding: 10px">
+    <a style="color: #c62b26" class="am-btn " href="/yslx" >返 回 <i class="am-icon-reply"></i></a>
+</div>
+{include file="public/floor" /}
+{include file="public/footer_js" /}
+
+
+<script type="text/javascript">
+
+    //返回顶部
+    function imj2(){
+        this.init();
+    }
+    imj2.prototype = {
+        constructor: imj2,
+        init: function(){
+            this._initBackTop();
+        },
+        _initBackTop: function(){
+            var $backTop = this.$backTop = $('<div class="m-top-cbbfixed">'+
+                '<a class="m-top-weixin m-top-cbbtn"">'+
+                '<span class="m-top-weixin-icon"></span><div></div>'+
+                '</a>'+
+                '<a class="m-top-go m-top-cbbtn">'+
+                '<span class="m-top-goicon"></span>'+
+                '</a>'+
+                '</div>');
+            $('body').append($backTop);
+
+            $backTop.click(function(){
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            });
+
+            var timmer = null;
+            $(window).bind("scroll",function() {
+                var d = $(document).scrollTop(),
+                    e = $(window).height();
+                0 < d ? $backTop.css("bottom", "10px") : $backTop.css("bottom", "-90px");
+                clearTimeout(timmer);
+                timmer = setTimeout(function() {
+                    clearTimeout(timmer)
+                },100);
+            });
+        }
+
+    }
+    var imj2 = new imj2();
+    //end返回顶部
+</script>
+
+
+</body>
+</html>

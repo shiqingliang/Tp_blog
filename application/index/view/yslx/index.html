@@ -1,0 +1,162 @@
+{include file="public/header" /}
+<style>
+    .m-service-container  ul li {
+        border-bottom-color: #232323;
+    }
+    .am-container li a{
+        color: #1a1f2a;
+    }
+    .m-service-container  ul li a:hover{
+        text-decoration:none;
+        color: #f0f0f0;
+    }
+
+    .home {
+        color: #f0f0f0;
+    }
+
+    .LM{
+        color: #f0f0f0;
+        font-size:15px;"
+    }
+
+    a {
+        color: #0e90d2;
+    }
+</style>
+
+<div class="m-header-banner m-list-header" style="background: url(__STATIC__/images/yslx.jpg) 50% 0 no-repeat fixed;">
+    <section class="am-container">
+        <hgroup data-am-scrollspy="{animation:'slide-bottom', delay: 317}">
+            <h2>运输路线</h2>
+            <p>为了提升用户的体验我们提供了多种运输方式！</p>
+        </hgroup>
+    </section>
+</div>
+<nav class="m-cat-nav">
+    <ul class="am-container">
+        <li ><a href="{:url('index/gsjj/index')}"><i class="icon-chevron-right"></i>公司简介</a></li>
+        <li class="am-active" ><a href="{:url('index/yslx/index')}"><i class="icon-chevron-right"></i>运输路线</a></li>
+        <li ><a href="/fwln"><i class="icon-chevron-right"></i>服务理念</a></li>
+        <li ><a href="http://hqld.cc/"><i class="icon-chevron-right"></i>电子商务</a></li>
+        <li ><a href="{:url('index/contact/index')}"><i class="icon-chevron-right"></i>联系我们</a></li>
+    </ul>
+</nav>
+
+<section class="am-container m-service-page">
+    <div class="m-service-container">
+        <h2>服务体系</h2>
+        <ul class="am-avg-sm-1 am-avg-md-1 am-avg-lg-1 am-thumbnails m-service-list">
+
+
+            <li >
+                <a href="yslx_tlys">
+                <div class="am-u-lg-2 am-u-md-12 m-service-list-icon am-hide-md-down">
+                    <i class="am-icon-subway"></i>
+                </div>
+                <div class="am-u-lg-10 am-u-md-12 am-u-sm-12">
+                    <h3>铁路运输 &nbsp;&nbsp;<i class="am-icon-subway"></i></h3>
+                    <p>全国内铁路快速运输，跟安全，更准时，更方便，更快捷。</p>
+                </div>
+               </a> </li >
+
+            <li><a href="yslx_ky">
+                <div class="am-u-lg-2 am-u-md-12 m-service-list-icon am-hide-md-down">
+                    <i class="am-icon-space-shuttle"></i>
+                </div>
+                <div class="am-u-lg-10 am-u-md-12 am-u-sm-12">
+                    <h3>空运&nbsp;&nbsp;<i class="am-icon-space-shuttle"></i></h3>
+                    <p>
+                        空运以专业的态度为海内外客户提供安全，快捷，高效的物流服务。 以贵州市场为依托，整合贵州，四川，广州，上海，宁波，武汉，北京等机场的优势，航线覆盖全球的各大国际机场。
+                    </p>
+                </div>
+            </a>
+            </li>
+
+
+
+            <li><a href="yslx_kcys">
+                <div class="am-u-lg-2 am-u-md-12 m-service-list-icon am-hide-md-down">
+                    <i class="am-icon-truck"></i>
+                </div>
+                <div class="am-u-lg-10 am-u-md-12 am-u-sm-12">
+
+                    <h3>跨城运输&nbsp;&nbsp;<i class="am-icon-truck"></i></h3>
+                    <p>
+                        卡车运输服务是内陆运输的重要参与者。优点适用广、效率高、灵活快速，缺点是容易受自然灾害（洪水、冰雪等）、拥堵、道路等因素影响。
+                    </p>
+                </div>
+            </a>
+            </li>
+            <li>
+                <div class="am-u-lg-2 am-u-md-12 m-service-list-icon am-hide-md-down">
+                    <i class="am-icon-credit-card"></i>
+                </div>
+                <div class="am-u-lg-10 am-u-md-12 am-u-sm-12">
+                    <h3>电子商务  <i class="am-icon-credit-card"></i></h3>
+                    <p>淘宝、天猫、京东店铺,店铺服务 </p>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</section>
+{include file="public/floor" /}
+{include file="public/footer_js" /}
+<script type="text/javascript">
+    $(function(){
+        var str = "http://www.imj2.com/fuwu/";
+        $("#code").qrcode({
+            render: "table",
+            width: 100,
+            height:100,
+            text: str
+        });
+    })
+    // 二维码生成
+    //返回顶部
+    function imj2(){
+        this.init();
+    }
+    imj2.prototype = {
+        constructor: imj2,
+        init: function(){
+            this._initBackTop();
+        },
+        _initBackTop: function(){
+            var $backTop = this.$backTop = $('<div class="m-top-cbbfixed">'+
+                '<a class="m-top-weixin m-top-cbbtn"">'+
+                '<span class="m-top-weixin-icon"></span><div></div>'+
+                '</a>'+
+                '<a class="m-top-go m-top-cbbtn">'+
+                '<span class="m-top-goicon"></span>'+
+                '</a>'+
+                '</div>');
+            $('body').append($backTop);
+
+            $backTop.click(function(){
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            });
+
+            var timmer = null;
+            $(window).bind("scroll",function() {
+                var d = $(document).scrollTop(),
+                    e = $(window).height();
+                0 < d ? $backTop.css("bottom", "10px") : $backTop.css("bottom", "-90px");
+                clearTimeout(timmer);
+                timmer = setTimeout(function() {
+                    clearTimeout(timmer)
+                },100);
+            });
+        }
+
+    }
+    var imj2 = new imj2();
+    //end返回顶部
+</script>
+
+
+</body>
+</html>
